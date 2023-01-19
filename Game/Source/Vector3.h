@@ -17,6 +17,7 @@ public:
 	void Normalize();
 	void Rotate(const Quaternion& q);
 	void Rotate(const Vector3& axis, double angle);
+	void Rotate(float x, float y, float z);
 	Vector4 Homogeneous() const;
 
 	bool IsNormalized();

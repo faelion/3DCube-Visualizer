@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include "List.h"
+#include "math.h"
 
 #include "PugiXml/src/pugixml.hpp"
 

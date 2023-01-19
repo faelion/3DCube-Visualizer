@@ -29,7 +29,19 @@ bool Scene::Awake()
 // Called before the first frame
 bool Scene::Start()
 {
-	img = app->tex->Load("Assets/Textures/test.png");
+	axis.x = 0.1;
+	axis.y = 0.1;
+	axis.z = 0.1;
+
+	for (auto& p : points)
+	{
+		c.x += p.x;
+		c.y += p.y;
+		c.z += p.z;
+	}
+	c.x /= points.size();
+	c.y /= points.size();
+	c.z /= points.size();
 	return true;
 }
 
@@ -54,7 +66,30 @@ bool Scene::Update(float dt)
 	if(app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		app->render->camera.x += 1;
 
-	app->render->DrawTexture(img, 380, 100);
+	//app->render->DrawTexture(img, 380, 100);
+
+	for (int i = 0; i < 8; i++)
+	{
+		points.at(i).x -= c.x;
+		points.at(i).y -= c.y;
+		points.at(i).z -= c.z;
+		points.at(i).Rotate(0.002, 0.001, 0.004);
+		points.at(i).x += c.x;
+		points.at(i).y += c.y;
+		points.at(i).z += c.z;
+		app->render->Pixel(points.at(i).x, points.at(i).y);
+	}
+	for (int i = 0; i < 12; i++)
+	{
+		app->render->DrawLine(points[connections.at(i).a].x,
+							  points[connections.at(i).a].y,
+							  points[connections.at(i).b].x,
+							  points[connections.at(i).b].y, 255, 255, 255);
+	}
+
+	app->render->PrintPoints();
+	app->render->clear();
+	SDL_Delay(30);
 
 	return true;
 }

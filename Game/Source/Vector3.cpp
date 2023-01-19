@@ -66,6 +66,23 @@ void Vector3::Rotate(const Vector3& axis, double angle)
 	z = z * cos(angle) + sin(angle) * (z * axis.z) + (1 - cos(angle)) * (z * axis.z) * axis.z;
 }
 
+void Vector3::Rotate(float a, float b, float c)
+{
+	float rad = 0;
+	rad = a;
+	y = cos(rad) * y - sin(rad) * z;
+	z = sin(rad) * y + cos(rad) * z;
+
+	rad = b;
+	x = cos(rad) * x + sin(rad) * z;
+	z = -sin(rad) * x + cos(rad) * z;
+
+	rad = c;
+	x = cos(rad) * x - sin(rad) * y;
+	y = sin(rad) * x + cos(rad) * y;
+
+}
+
 Vector4 Vector3::Homogeneous() const
 {
 	return Vector4(x, y, z, 1.0);

@@ -8,6 +8,7 @@
 
 #include "Defs.h"
 #include "Log.h"
+#include "math.h"
 
 #include <iostream>
 #include <sstream>

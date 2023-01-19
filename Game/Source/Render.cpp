@@ -224,3 +224,17 @@ bool Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uin
 
 	return ret;
 }
+
+void Render::Pixel(float x, float y)
+{
+	pixels.emplace_back(x, y);
+}
+
+void Render::PrintPoints()
+{
+	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+	for (auto& point : pixels)
+	{
+		SDL_RenderDrawPoint(renderer, point.x, point.y);
+	}
+}
